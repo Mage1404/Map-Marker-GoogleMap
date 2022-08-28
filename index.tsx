@@ -156,7 +156,9 @@ function initAutocomplete() {
   $("#deletebtn").on("click", function () {
     const selectall = document.getElementsByName("select-all-rows")[0];
     if (selectall.checked) {
-      setMapOnAll(null);
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
       markers = [];
       locations = [];
       unmountComponentAtNode(reacttable);
@@ -208,12 +210,6 @@ function initAutocomplete() {
       );
     }
   });
-}
-
-function setMapOnAll(map: google.maps.Map | null) {
-  for (let i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
-  }
 }
 
 function handleLocationError(
